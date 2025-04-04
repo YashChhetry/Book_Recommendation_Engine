@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommendation Engine</title>
+</head>
+<body>
+    <h1>Book Recommendation Engine</h1>
+    <form id="recommendation-form">
+        <label for="user_id">User ID:</label>
+        <input type="text" id="user_id" name="user_id">
+        <button type="submit">Get Recommendations</button>
+    </form>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('recommendation-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user_id = document.getElementById('user_id').value;
+            const response = await fetch('/recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id }),
+            });
+            const data = await response.json();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = data.map(book => `<p>${book.title} by ${book.author}</p>`).join('');
+        });
+    </script>
+</body>
+</html>
