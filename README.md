@@ -7,7 +7,7 @@ To install pyspark:
 pip install pyspark
 
 
-**Code:**
+**Code to train the model:**
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.ml.feature import StringIndexer
